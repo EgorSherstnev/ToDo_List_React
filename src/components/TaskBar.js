@@ -1,17 +1,24 @@
 import React, {useState} from "react";
 
-const TaskBar = () => {
+const TaskBar = ({onTaskSubmit}) => {
     const [task, setTask] = useState('');
 
     const onInputChange = (event) => {
         setTask(event.target.value);
-        console.log('setTask пришло')
+    };
+
+    const onAddTask = (event) => {
+        event.preventDefault();
+        onTaskSubmit(task);
+       // console.log('добавил таску')
+        setTask('');
+        //console.log('очистил поле')
     };
 
     return (
         <div className="search-bar ui segment">
             
-            <form className="ui form">
+            <form  className="ui form">
                 <div className="field">
                     <label>Добавить задачу</label>
                     <input 
@@ -20,7 +27,8 @@ const TaskBar = () => {
                         onChange={onInputChange}
                     />
                     <button 
-                        //onClick={}
+                        value="clickme"
+                        onClick={onAddTask }
                     >
                         Добавить
                     </button>
